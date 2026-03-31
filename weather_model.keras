@@ -1,1 +1,3 @@
-model.save("weather_model.keras")
+version https://git-lfs.github.com/spec/v1
+oid sha256:814b967ca510db5548bf542c64c0cfd0d8413d68d284f0c6d9eae9f8defceb00
+size 35
