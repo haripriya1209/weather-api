@@ -3,11 +3,23 @@ from tensorflow.keras.models import load_model
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+import os
+import requests
 
 app = FastAPI()
 
+# Path to model file
+MODEL_PATH = "weather_model.keras"
+
+# Download model if not already present
+if not os.path.exists(MODEL_PATH):
+    url = "https://your-storage-link/weather_model.keras"  # replace with Hugging Face / Google Drive / S3 link
+    r = requests.get(url)
+    with open(MODEL_PATH, "wb") as f:
+        f.write(r.content)
+
 # Load your model
-model = load_model("weather_model.keras", compile=False)
+model = load_model(MODEL_PATH, compile=False)
 model.compile(optimizer="adam", loss="mse")
 
 features = ["temperature","humidity","wind_speed","rainfall",
